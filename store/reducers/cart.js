@@ -1,6 +1,6 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
-import CartItem from "../../models/cart-item";
-import { DrawerActions } from "react-navigation";
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/cart';
+import { ADD_ORDER } from '../actions/orders';
+import CartItem from '../../models/cart-item';
 
 const initialState = {
   items: {},
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
       let updatedOrNewCartItem;
 
       if (state.items[addedProduct.id]) {
-        //when a product already exists in the cart
+        // already have the item in the cart
         updatedOrNewCartItem = new CartItem(
           state.items[addedProduct.id].quantity + 1,
           prodPrice,
@@ -32,13 +32,12 @@ export default (state = initialState, action) => {
         items: { ...state.items, [addedProduct.id]: updatedOrNewCartItem },
         totalAmount: state.totalAmount + prodPrice
       };
-
     case REMOVE_FROM_CART:
       const selectedCartItem = state.items[action.pid];
       const currentQty = selectedCartItem.quantity;
       let updatedCartItems;
       if (currentQty > 1) {
-        //need to reduce it, not erase it
+        // need to reduce it, not erase it
         const updatedCartItem = new CartItem(
           selectedCartItem.quantity - 1,
           selectedCartItem.productPrice,
@@ -55,6 +54,9 @@ export default (state = initialState, action) => {
         items: updatedCartItems,
         totalAmount: state.totalAmount - selectedCartItem.productPrice
       };
+    case ADD_ORDER:
+      return initialState;
   }
+
   return state;
 };
