@@ -9,7 +9,7 @@ import {
   Platform
 } from "react-native";
 
-import Card from '../UI/Card'
+import Card from "../UI/Card";
 
 const ProductItem = props => {
   let TouchableCmp = TouchableOpacity;
@@ -27,7 +27,7 @@ const ProductItem = props => {
             </View>
             <View style={styles.details}>
               <Text style={styles.title}>{props.title}</Text>
-              <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+              <Text style={styles.price}>${props.price}</Text>
             </View>
             <View style={styles.actions}>{props.children}</View>
           </View>
