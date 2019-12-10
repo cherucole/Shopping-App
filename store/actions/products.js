@@ -6,15 +6,37 @@ export const deleteProduct = productId => {
   return { type: DELETE_PRODUCT, pid: productId };
 };
 
-export const createProduct = (title, description, price, imageUrl) => {
-  return {
-    type: CREATE_PRODUCT,
-    productData: {
-      title,
-      description,
-      price,
-      imageUrl //modern JS allows for one name instead of title:title if same name matching
-    }
+export const createProduct = (title, description, imageUrl, price) => {
+  return async dispatch => {
+    // any async code you want!
+    const response = await fetch(
+      "https://shopping-app-12053.firebaseio.com/products.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          imageUrl,
+          price
+        })
+      }
+    );
+
+    const resData = await response.json();
+
+    dispatch({
+      type: CREATE_PRODUCT,
+      productData: {
+        id: resData.name,
+        title,
+        description,
+        imageUrl,
+        price
+      }
+    });
   };
 };
 
@@ -25,7 +47,7 @@ export const updateProduct = (id, title, description, imageUrl) => {
     productData: {
       title,
       description,
-      imageUrl //modern JS allows for one name instead of title:title if same name matching
+      imageUrl
     }
   };
 };

@@ -15,15 +15,15 @@ import Colors from "../constants/Colors";
 
 const defaultNavOptions = {
   headerStyle: {
-    backgroundColor: Platform.OS == "android" ? Colors.primary : ""
+    backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
   },
   headerTitleStyle: {
-    fontFamily: "open-sans-bold"
+    fontFamily: 'open-sans-bold'
   },
   headerBackTitleStyle: {
-    fontFamily: "open-sans"
+    fontFamily: 'open-sans'
   },
-  headerTintColor: Platform.OS == "android" ? "white" : Colors.primary
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
 };
 
 const ProductsNavigator = createStackNavigator(
@@ -36,7 +36,7 @@ const ProductsNavigator = createStackNavigator(
     navigationOptions: {
       drawerIcon: drawerConfig => (
         <Ionicons
-          name={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+          name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
           size={23}
           color={drawerConfig.tintColor}
         />
@@ -54,7 +54,7 @@ const OrdersNavigator = createStackNavigator(
     navigationOptions: {
       drawerIcon: drawerConfig => (
         <Ionicons
-          name={Platform.OS === "android" ? "md-list" : "ios-list"}
+          name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
           size={23}
           color={drawerConfig.tintColor}
         />
@@ -65,23 +65,23 @@ const OrdersNavigator = createStackNavigator(
 );
 
 const AdminNavigator = createStackNavigator(
-  {
-    UserProducts: UserProductsScreen,
-    EditProduct: EditProductScreen
-  },
-  {
-    navigationOptions: {
-      drawerIcon: drawerConfig => (
-        <Ionicons
-          name={Platform.OS === "android" ? "md-create" : "ios-create"}
-          size={23}
-          color={drawerConfig.tintColor}
-        />
-      )
+    {
+      UserProducts: UserProductsScreen,
+      EditProduct: EditProductScreen
     },
-    defaultNavigationOptions: defaultNavOptions
-  }
-);
+    {
+      navigationOptions: {
+        drawerIcon: drawerConfig => (
+          <Ionicons
+            name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+            size={23}
+            color={drawerConfig.tintColor}
+          />
+        )
+      },
+      defaultNavigationOptions: defaultNavOptions
+    }
+  );
 
 const ShopNavigator = createDrawerNavigator(
   {
